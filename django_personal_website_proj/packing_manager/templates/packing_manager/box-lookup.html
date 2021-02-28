@@ -1,0 +1,101 @@
+{% extends "packing_manager/local_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div>
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="box_num">Box Number</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-cube"></i>
+            </div>
+          </div>
+            <input id="box_num" name="box_num" value="{{box.box_num}}" type="text" aria-describedby="box_numHelpBlock" required="required" class="form-control">
+        </div>
+        <span id="box_numHelpBlock" class="form-text text-muted">Must be a number</span>
+      </div>
+      <div class="form-group">
+        <label for="box_dest">Destination</label>
+        <div>
+          <select id="box_dest" name="box_dest" required="required" class="custom-select">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="bedroom">Bedroom</option>
+            <option value="kitchen">Kitchen</option>
+            <option value="living_room">Living Room</option>
+            <option value="bathroom">Bathroom</option>
+            <option value="garage">Garage</option>
+            <option value="storage">Storage</option>
+          </select>
+            <script>
+              function setSelectedIndex(s, v) {
+                for ( var i = 0; i < s.options.length; i++ ) {
+                  if ( s.options[i].text == v ) {
+                    s.options[i].selected = true;
+                    return;
+                  }
+                }
+              }
+             setSelectedIndex(document.getElementById('box_dest'),"{{box.box_dest|capfirst}}");
+          </script>
+
+        </div>
+      </div>
+      <div>
+      </div>
+      <div class="form-group">
+        <label for="contents">Contents</label>
+        <textarea id="contents" name="contents" cols="40" rows="5" aria-describedby="contentsHelpBlock" required="required" class="form-control">{{box.contents}}</textarea>
+        <span id="contentsHelpBlock" class="form-text text-muted">Contents of the box separated by commas</span>
+      </div>
+      <div class="form-group">
+        <label for="box_warnings">Box Warnings</label>
+        <div>
+          <select multiple="multiple" id="box_warnings" name="box_warnings" aria-describedby="box_warningsHelpBlock" class="custom-select">
+            <option value="fragile">Fragile</option>
+            <option value="private">Private</option>
+            <option value="batteries">Batteries</option>
+            <option value="flammable">Flammable</option>
+            <option value="explosive">Explosive</option>
+          </select>
+          <script>
+            function setSelectedIndex(s, v) {
+              var split_v = v.split(", ");
+              for ( var j = 0; j < split_v.length; j++ ) {
+                for ( var i = 0; i < s.options.length; i++ ) {
+                  if ( s.options[i].text == split_v[j].charAt(0).toUpperCase() + split_v[j].slice(1)) {
+                    s.options[i].selected = true;
+                  }
+                }
+              }
+              return;
+            }
+           setSelectedIndex(document.getElementById('box_warnings'),"{{box.box_warnings}}");
+        </script>
+          <span id="box_warningsHelpBlock" class="form-text text-muted">Select box considerations/warnings</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="box_id">Box Id</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-database"></i>
+            </div>
+          </div>
+            <input id="box_id" name="box_id" value="{{box.box_id}}" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+        <button name="submit_and_download" type="submit" class="btn btn-primary">Submit and Download</button>
+        <!--<input id="reset" type="button" value="Reset" onclick="{% url 'packing-manager-box-lookup' %}" />-->
+        <!--<button name="reset" type="button" class="btn btn-primary" href="{% url 'packing-manager-box-lookup' %}" >Reset</button>-->
+        <form action="{% url 'packing-manager-box-lookup' %}">
+          <input type="submit" value="Reset" class="btn btn-primary"/>
+        </form>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

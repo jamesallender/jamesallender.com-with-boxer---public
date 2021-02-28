@@ -1,0 +1,30 @@
+{% extends "home/base.html" %}
+
+{% block titleblock %}
+    {% if title %}
+        <title>JamesAllender.com - {{title}}</title>
+    {% else %}
+        <title>JamesAllender.com</title>
+    {% endif %}
+{% endblock titleblock %}
+
+{% block navbar %}
+  <a class="nav-item nav-link" href="{% url 'blog-home' %}">Blog Home</a>
+  <a class="nav-item nav-link" href="{% url 'packing-manager-home' %}">Packing Manager Home</a>
+  <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+{% endblock navbar %}
+
+{% block content %}
+{% endblock content %}
+
+{% block sidebar %}
+<h3>Our Sidebar</h3>
+<p class='text-muted'>You can put any information here you'd like.
+<ul class="list-group">
+  <li class="list-group-item list-group-item-light">Latest Posts</li>
+  <li class="list-group-item list-group-item-light">Announcements</li>
+  <li class="list-group-item list-group-item-light">Calendars</li>
+  <li class="list-group-item list-group-item-light">etc</li>
+</ul>
+</p>
+{% endblock sidebar %}

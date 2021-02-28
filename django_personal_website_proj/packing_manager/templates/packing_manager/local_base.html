@@ -1,0 +1,30 @@
+{% extends "home/base.html" %}
+
+{% block titleblock %}
+    {% if title %}
+        <title>Packing Manager - {{title}}</title>
+    {% else %}
+        <title>Packing Manager</title>
+    {% endif %}
+{% endblock titleblock %}
+
+{% block navbar %}
+  <a class="nav-item nav-link" href="{% url 'packing-manager-home' %}">Packing Manager Home</a>
+  <a class="nav-item nav-link" href="{% url 'packing-manager-box-lookup' %}">Box Lookup</a>
+  <a class="nav-item nav-link" href="{% url 'packing-manager-about' %}">Packing Manager About</a>
+{% endblock navbar %}
+
+{% block content %}
+{% endblock content %}
+
+
+{% block sidebar %}
+<h3>Boxes</h3>
+<p class='text-muted'>Existing Boxes
+<ul class="list-group">
+    {% for box in boxes %}
+    <a class="list-group-item list-group-item-light" href="{% url 'packing-manager-box-lookup' %}?box_id={{ box.box_id }}">Box {{ box.box_num }} - {{ box.box_dest|title }}</a>
+    {% endfor %}
+</ul>
+</p>
+{% endblock sidebar %}

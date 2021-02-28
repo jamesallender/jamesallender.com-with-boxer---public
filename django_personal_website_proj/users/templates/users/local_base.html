@@ -1,0 +1,17 @@
+{% extends "home/base.html" %}
+
+{% block titleblock %}
+    {% if title %}
+        <title>Register- {{title}}</title>
+    {% else %}
+        <title>Registerg</title>
+    {% endif %}
+{% endblock titleblock %}
+
+{% block navbar %}
+    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Blog Home</a>
+    <a class="nav-item nav-link" href="{% url 'blog-about' %}">Blog About</a>
+{% endblock navbar %}
+
+{% block content %}
+{% endblock content %}

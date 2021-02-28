@@ -1,0 +1,17 @@
+{% extends "home/base.html" %}
+
+{% block titleblock %}
+    {% if title %}
+        <title>Blog - {{title}}</title>
+    {% else %}
+        <title>Blog</title>
+    {% endif %}
+{% endblock titleblock %}
+
+{% block navbar %}
+  <a class="nav-item nav-link" href="{% url 'blog-home' %}">Blog Home</a>
+  <a class="nav-item nav-link" href="{% url 'blog-about' %}">Blog About</a>
+{% endblock navbar %}
+
+{% block content %}
+{% endblock content %}
